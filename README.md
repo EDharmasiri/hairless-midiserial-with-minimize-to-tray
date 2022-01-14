@@ -1,6 +1,6 @@
 This is a fork of ProjectGus' Hairless MIDI Serial (https://projectgus.github.io/hairless-midiserial/).
 
-If you've build a custom midi controller using a microbit/arduino/etc., you have probably been directed to installing Hairless MIDI Serial and LoopMIDI in order to bridge your controller to your DAW.
+If you've build a custom midi controller using a microbit/arduino/microcontroller, you've probably been directed to installing Hairless MIDI Serial and LoopMIDI in order to bridge your controller to your DAW.
 
 This fork extends the functionality of the original program by including a 'Start minimised to tray' checkbox. If you keep your controller plugged into your PC at all times, you can add the program to your startup folder and use it without having an additional window open.
 
