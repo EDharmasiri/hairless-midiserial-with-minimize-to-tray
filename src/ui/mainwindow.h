@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSystemTrayIcon>
 #include <QComboBox>
 #include <QLabel>
 #include <QTime>
@@ -35,21 +36,31 @@ private:
     int scrollbackSize;
     QTimer debugListTimer;
     QStringList debugListMessages;
+	
+	QSystemTrayIcon *trayIcon;
+	QAction *quitAction;
+	QMenu *trayMenu;
 
     void refresh();
     void refreshSerial();
     void refreshMidiIn();
     void refreshMidiOut();
     void refreshMidi(QComboBox *combo, RtMidi *midi);
+	
+	void createTray();
 
 private slots:
     void onValueChanged();
     void onDisplayMessage(QString message);
     void onDebugMessage(QString message);
     void onDebugClicked(bool value);
+	void onMinToTrayClicked(bool value);
     void refreshDebugList();
     void showPreferences();
     void showAboutBox();
+
+    void restoreFromTray();
+    void restoreFromTrayOnDoubleClick(QSystemTrayIcon::ActivationReason reason);
 };
 
 #endif // MAINWINDOW_H

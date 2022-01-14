@@ -8,6 +8,5 @@ int main(int argc, char *argv[])
     QCoreApplication::setOrganizationDomain("projectgus.com");
     QCoreApplication::setApplicationName("Hairless MIDI Serial Bridge");
     MainWindow w;
-    w.show();
     return a.exec();
 }

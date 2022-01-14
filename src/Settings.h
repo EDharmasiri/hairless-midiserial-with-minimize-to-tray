@@ -23,6 +23,9 @@ public:
 
     static bool getDebug() { return QSettings().value("debug", false).toBool(); }
     static void setDebug(bool debug) { QSettings().setValue("debug", debug); }
+	
+	static bool getMinToTray() { return QSettings().value("minToTray", false).toBool(); }
+	static void setMinToTray(bool minToTray) { QSettings().setValue("minToTray", minToTray); }
 
     static PortSettings getPortSettings() {
         PortSettings result;

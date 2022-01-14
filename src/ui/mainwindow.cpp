@@ -25,10 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
     debugListTimer(),
     debugListMessages()
 {
+	// Create the tray
+	createTray();
+	
     ui->setupUi(this);
-    // Fixed width, minimum height
-    this->setMinimumSize(this->size());
-    this->setMaximumSize(this->size().width(), 2000);
+    // Dynamic width and height
+
+
 #ifdef Q_OS_LINUX
     this->setWindowIcon(QIcon(":/images/images/icon48.png"));
 #endif
@@ -43,7 +46,9 @@ MainWindow::MainWindow(QWidget *parent) :
     this->workerThread->start(QThread::HighestPriority);
     refresh();
     scrollbackSize=Settings::getScrollbackSize();
-    ui->chk_debug->setChecked( Settings::getDebug() );
+    ui->chk_debug->setChecked(Settings::getDebug());
+    ui->chk_min->setChecked(Settings::getMinToTray());
+	
     selectIfAvailable(ui->cmbMidiIn, Settings::getLastMidiIn());
     selectIfAvailable(ui->cmbMidiOut, Settings::getLastMidiOut());
     selectIfAvailable(ui->cmbSerial, Settings::getLastSerialPort());
@@ -58,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->cmbSerial, SIGNAL(currentIndexChanged(int)), SLOT(onValueChanged()));
     connect(ui->chk_on, SIGNAL(clicked()), SLOT(onValueChanged()));
     connect(ui->chk_debug, SIGNAL(clicked(bool)), SLOT(onDebugClicked(bool)));
+	connect(ui->chk_min, SIGNAL(clicked(bool)), SLOT(onMinToTrayClicked(bool)));
     connect(&debugListTimer, SIGNAL(timeout()), SLOT(refreshDebugList()));
 
 
@@ -67,6 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->actionPreferences, SIGNAL(triggered()), SLOT(showPreferences()));
 
     // Get started
+    if(!Settings::getMinToTray())
+        show();
+
     onValueChanged();
 
 #ifdef Q_OS_MAC
@@ -82,6 +91,45 @@ MainWindow::~MainWindow()
 {
     bridge->deleteLater();
     delete ui;
+}
+
+void MainWindow::restoreFromTray(){
+    if(!isVisible()){
+        onMinToTrayClicked(false);
+        ui->chk_min->setChecked(Settings::getMinToTray());
+
+        show();
+        raise();
+        setFocus();
+    }
+}
+
+void MainWindow::restoreFromTrayOnDoubleClick(QSystemTrayIcon::ActivationReason reason)
+{
+    if (reason == QSystemTrayIcon::DoubleClick) {
+        restoreFromTray();
+    }
+}
+
+void MainWindow::createTray()
+{
+	//Create the tray icon
+    trayIcon = new QSystemTrayIcon(QIcon(":/images/images/icon48.png"));
+	
+	//Connect the interaction with the TrayIcon
+    connect(trayIcon, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), this, SLOT(restoreFromTrayOnDoubleClick(QSystemTrayIcon::ActivationReason)));
+
+    QAction *configureAction = new QAction("Configure Hairless Midi", this);
+    connect(configureAction, SIGNAL(triggered()), this, SLOT(restoreFromTray()));
+	
+	QAction *quitAction = new QAction("Quit", this);
+	connect(quitAction, SIGNAL(triggered()), qApp, SLOT(quit()));
+	
+    QMenu *trayMenu = new QMenu(this);
+    trayMenu->addAction(configureAction);
+    trayMenu->addAction(quitAction);
+	trayIcon->setContextMenu(trayMenu);
+    trayIcon->show();
 }
 
 void MainWindow::showPreferences()
@@ -183,6 +231,14 @@ void MainWindow::onDebugClicked(bool value)
     Settings::setDebug(value);
 }
 
+void MainWindow::onMinToTrayClicked(bool value)
+{
+	Settings::setMinToTray(value);
+
+    if(value)
+        hide();
+}
+
 void MainWindow::onValueChanged()
 {
     if(bridge) {
@@ -252,5 +308,6 @@ void MainWindow::resizeEvent(QResizeEvent *)
     QRect geo = lst->geometry();
     geo.setHeight( this->height() - geo.top() - 20 );
     lst->setGeometry(geo);
+    ui->lst_debug->setMaximumSize(this->size().width() - 10, this->size().height() - 190);
 }
 

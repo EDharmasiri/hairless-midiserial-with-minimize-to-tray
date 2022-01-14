@@ -2,19 +2,34 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>278</height>
+    <width>610</width>
+    <height>273</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>610</width>
+    <height>273</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>610</width>
+    <height>16777215</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Hairless MIDI&lt;-&gt;Serial Bridge</string>
@@ -30,13 +45,22 @@
      </rect>
     </property>
     <property name="sizePolicy">
-     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
       <horstretch>0</horstretch>
-      <verstretch>1</verstretch>
+      <verstretch>0</verstretch>
      </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>0</width>
+      <height>81</height>
+     </size>
     </property>
     <property name="autoScroll">
      <bool>true</bool>
+    </property>
+    <property name="resizeMode">
+     <enum>QListView::Adjust</enum>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -52,7 +76,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/arrows.png</pixmap>
+     <pixmap resource="../../resources.qrc">:/images/images/arrows.png</pixmap>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -74,11 +98,27 @@
      <string>Serial port</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="chk_on">
+   <widget class="QCheckBox" name="chk_min">
     <property name="geometry">
      <rect>
       <x>10</x>
       <y>10</y>
+      <width>185</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Start Minimised to Tray</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="chk_on">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
       <width>185</width>
       <height>22</height>
      </rect>
@@ -184,7 +224,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/led-off.png</pixmap>
+     <pixmap resource="../../resources.qrc">:/images/images/led-off.png</pixmap>
     </property>
    </widget>
    <widget class="BlinkenLight" name="led_midiout">
@@ -200,7 +240,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/led-off.png</pixmap>
+     <pixmap resource="../../resources.qrc">:/images/images/led-off.png</pixmap>
     </property>
    </widget>
    <widget class="BlinkenLight" name="led_midiin">
@@ -216,7 +256,7 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="resources.qrc">:/images/images/led-off.png</pixmap>
+     <pixmap resource="../../resources.qrc">:/images/images/led-off.png</pixmap>
     </property>
    </widget>
   </widget>
@@ -225,8 +265,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>604</width>
-     <height>26</height>
+     <width>610</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -282,7 +322,7 @@
   <tabstop>lst_debug</tabstop>
  </tabstops>
  <resources>
-  <include location="resources.qrc"/>
+  <include location="../../resources.qrc"/>
  </resources>
  <connections/>
 </ui>
