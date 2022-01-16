@@ -29,7 +29,7 @@ Instructions modified from [this guide](https://wiki.qt.io/Building_a_static_Qt_
 6. Run ```mingw32-make install```
 7. Configure the kit in QT using [this guide](https://tadeubento.com/2020/qt-static-builds-under-windows/)
 
-Description from the original program below.
+# Description from the original program below.
 
 # Building Hairless Bridge from source
 
