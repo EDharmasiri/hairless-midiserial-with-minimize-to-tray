@@ -1,8 +1,12 @@
-Hairless MIDI<->Serial Bridge is the easiest way to connect serial devices (like Arduinos) to send and receive MIDI signals.
+This is a fork of ProjectGus' Hairless MIDI Serial (https://projectgus.github.io/hairless-midiserial/).
 
-The project home page is http://projectgus.github.com/hairless-midiserial/
+If you've build a custom midi controller using a microbit/arduino/microcontroller, you've probably been directed to installing Hairless MIDI Serial and LoopMIDI in order to bridge your controller to your DAW.
 
-Please see that page for information on running and using Hairless Midiserial, and downloadable compiled versions for Windows, OS X and Linux.
+This fork extends the functionality of the original program by including a 'Start minimised to tray' checkbox. If you keep your controller plugged into your PC at all times, you can add the program to your startup folder and use it without having an additional window open.
+
+![image](https://user-images.githubusercontent.com/12570294/149517727-a0fa5256-3285-404e-9dd9-e0e84f81e267.png)
+
+Description from the original program below.
 
 # Building Hairless Bridge from source
 
