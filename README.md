@@ -9,7 +9,7 @@ If you keep your controller plugged into your PC at all times, you can add the p
 
 This release was built with Qt 5.15.2.
 
-# To build a static release of qt (on windows)
+# To build a static release of QT (on Windows)
 Instructions modified from [this guide](https://wiki.qt.io/Building_a_static_Qt_for_Windows_using_MinGW)
 ## Prerequisites
 - MinGW-w64 8.1.0 (I used MSYS2)
