@@ -28,6 +28,8 @@ Instructions modified from [this guide](https://wiki.qt.io/Building_a_static_Qt_
 5. Run ```mingw32-make```
 6. Run ```mingw32-make install```
 7. Configure the kit in QT using [this guide](https://tadeubento.com/2020/qt-static-builds-under-windows/)
+8. Import the source code from this repository
+9. Build
 
 # Description from the original program below.
 
